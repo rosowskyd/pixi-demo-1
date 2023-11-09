@@ -47,8 +47,6 @@ export class Hero {
     update() {
         this.sprite.x = this.body.position.x - this.sprite.width / 2;
         this.sprite.y = this.body.position.y - this.sprite.height / 2;
-        console.log(window.innerWidth)
-        console.log("HERO X POSITION",this.sprite.x)
 
         // [14]
         if (this.sprite.y > window.innerHeight) {
