@@ -34,6 +34,7 @@ export class GameScene extends Scene {
         const colliders = [event.pairs[0].bodyA, event.pairs[0].bodyB];
         const hero = colliders.find(body => body.gameHero);
         const platform = colliders.find(body => body.gamePlatform);
+        // collliders for bird
 
         if (hero && platform) {
             this.hero.stayOnPlatform(platform.gamePlatform);
@@ -44,9 +45,15 @@ export class GameScene extends Scene {
         if (hero && diamond) {
             this.hero.collectDiamond(diamond.gameDiamond);
         }
+
+        const bird = colliders.find(body => body.gameBird)
+
+        if (hero && bird) {
+            this.hero.dieFromBird(bird.gameBird)
+        }
     }
 
-    createHero() {
+    async createHero() {
         this.hero = new Hero();
         this.container.addChild(this.hero.sprite);
 
@@ -56,8 +63,10 @@ export class GameScene extends Scene {
         });
 
         // [14]
-        this.hero.sprite.once("die", () => {
-            App.scenes.start("Game");
+        this.hero.sprite.once("die", async () => {
+            await setTimeout(() => {
+                App.scenes.start("Game");
+            }, 1000)
         });
         // [/14]
     }
@@ -84,5 +93,6 @@ export class GameScene extends Scene {
         this.hero.destroy();
         this.platfroms.destroy();
         this.labelScore.destroy();
+
     }
 }

@@ -14,6 +14,10 @@ export class Hero {
         this.score = 0;
     }
 
+    dieFromBird() {
+        this.sprite.emit("die");
+    }
+
     collectDiamond(diamond) {
         ++this.score;
         //[13]

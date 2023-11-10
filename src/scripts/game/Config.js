@@ -47,6 +47,13 @@ export const Config = {
             y: 595
         }
     },
+    birds: {
+        chance: 0.2,
+        offset: {
+            min: 200,
+            max: 300
+        }
+    },
     scenes: {
         "Game": GameScene
     }

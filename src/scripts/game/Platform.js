@@ -3,12 +3,14 @@ import * as PIXI from "pixi.js";
 import { App } from '../system/App';
 // [10]
 import { Diamond } from './Diamond';
+import { Bird } from './Bird';
 // [/10]
 
 export class Platform {
     constructor(rows, cols, x) {
         // [10]
         this.diamonds = [];
+        this.birds = [];
         // [/10]
 
         this.rows = rows;
@@ -24,6 +26,7 @@ export class Platform {
         this.dx = App.config.platforms.moveSpeed;
         this.createBody();
         this.createDiamonds();
+        this.createBirds();
     }
 
     // [10]
@@ -44,6 +47,23 @@ export class Platform {
             this.diamonds.push(diamond);
     }
     // [/10]
+
+    createBirds() {
+        const y = App.config.birds.offset.min + Math.random() * (App.config.birds.offset.max - App.config.birds.offset.min);
+
+        for (let i = 0; i < this.cols; i++) {
+            if (Math.random() < App.config.birds.chance) {
+                this.createBird(this.tileSize * i, -y);
+            }
+        }
+    }
+
+    createBird(x, y) {
+            const bird = new Bird(x, y);
+            this.container.addChild(bird.sprite);
+            bird.createBody();
+            this.birds.push(bird);
+    }
 
     createBody() {
         this.body = Matter.Bodies.rectangle(this.width / 2 + this.container.x, this.height / 2 + this.container.y, this.width, this.height, {friction: 0, isStatic: true});
@@ -86,6 +106,7 @@ export class Platform {
     destroy() {
         Matter.World.remove(App.physics.world, this.body);
         this.diamonds.forEach(diamond => diamond.destroy());
+        this.birds.forEach(bird => bird.destroy());
         this.container.destroy();
     }
 }
