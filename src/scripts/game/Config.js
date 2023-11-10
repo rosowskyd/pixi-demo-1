@@ -22,6 +22,13 @@ export const Config = {
             max: 200
         }
     },
+    slimes: {
+        chance: 0.1,
+        offset: {
+            min: 40,
+            max: 40
+        },
+    },
     platforms: {
         moveSpeed: -1.5,
         ranges: {

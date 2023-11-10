@@ -41,8 +41,14 @@ export class GameScene extends Scene {
 
         const diamond = colliders.find(body => body.gameDiamond);
 
+        const slime = colliders.find(body => body.gameSlime);
+
+        if (hero && slime) {
+            this.hero.slimeAttack(slime.gameSlime);
+        }
         if (hero && diamond) {
             this.hero.collectDiamond(diamond.gameDiamond);
+
         }
     }
 

@@ -21,6 +21,16 @@ export class Hero {
         //[/13]
         diamond.destroy();
     }
+
+    slimeAttack(slime) {
+        --this.score;
+        //[13]
+        this.sprite.emit("score");
+        //[/13]
+        slime.destroy();
+    }
+
+
     //[/12]
 
     startJump() {
@@ -39,7 +49,7 @@ export class Hero {
     // [/08]
 
     createBody() {
-        this.body = Matter.Bodies.rectangle(this.sprite.x + this.sprite.width / 2, this.sprite.y + this.sprite.height / 2, this.sprite.width, this.sprite.height, {friction: 0});
+        this.body = Matter.Bodies.rectangle(this.sprite.x + this.sprite.width / 2, this.sprite.y + this.sprite.height / 2, this.sprite.width, this.sprite.height, { friction: 0 });
         Matter.World.add(App.physics.world, this.body);
         this.body.gameHero = this;
     }
