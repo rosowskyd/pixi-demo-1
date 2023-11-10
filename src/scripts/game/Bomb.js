@@ -1,14 +1,14 @@
 import * as Matter from 'matter-js';
 import { App } from '../system/App';
 
-export class Bird {
+export class Bomb {
     constructor(x, y) {
         this.createSprite(x, y);
         App.app.ticker.add(this.update, this);
     }
 
     createSprite(x, y) {
-        this.sprite = App.sprite("bird");
+        this.sprite = App.sprite("bomb");
         this.sprite.x = x;
         this.sprite.y = y;
     }
@@ -22,7 +22,7 @@ export class Bird {
     createBody() {
         this.body = Matter.Bodies.rectangle(this.sprite.width / 2 + this.sprite.x + this.sprite.parent.x, this.sprite.height / 2 + this.sprite.y + this.sprite.parent.y, this.sprite.width, this.sprite.height, {friction: 0, isStatic: true, render: { fillStyle: '#060a19' }});
         this.body.isSensor = true;
-        this.body.gameBird = this;
+        this.body.gameBomb = this;
         Matter.World.add(App.physics.world, this.body);
     }
 

@@ -6,6 +6,7 @@ import { Scene } from '../system/Scene';
 import { Hero } from "./Hero";
 import { Platforms } from "./Platforms";
 
+
 export class GameScene extends Scene {
     create() {
         this.createBackground();
@@ -34,7 +35,7 @@ export class GameScene extends Scene {
         const colliders = [event.pairs[0].bodyA, event.pairs[0].bodyB];
         const hero = colliders.find(body => body.gameHero);
         const platform = colliders.find(body => body.gamePlatform);
-        // collliders for bird
+        // collliders for bomb
 
         if (hero && platform) {
             this.hero.stayOnPlatform(platform.gamePlatform);
@@ -46,10 +47,10 @@ export class GameScene extends Scene {
             this.hero.collectDiamond(diamond.gameDiamond);
         }
 
-        const bird = colliders.find(body => body.gameBird)
+        const bomb = colliders.find(body => body.gameBomb)
 
-        if (hero && bird) {
-            this.hero.dieFromBird(bird.gameBird)
+        if (hero && bomb) {
+            this.hero.dieFromBomb(bomb.gameBomb)
         }
     }
 
@@ -64,9 +65,19 @@ export class GameScene extends Scene {
 
         // [14]
         this.hero.sprite.once("die", async () => {
+            this.gameOver = App.sprite("gameover");
+            this.gameOver.anchor.set(0.5);
+            this.gameOver.x = window.innerWidth / 2;
+            this.gameOver.y = window.innerHeight / 2;
+
+            this.container.addChild(this.gameOver);
+
+            App.app.ticker.add((delta) => {
+                this.gameOver.rotation += 0.04 * delta;
+            });
             await setTimeout(() => {
                 App.scenes.start("Game");
-            }, 1000)
+            }, 3000)
         });
         // [/14]
     }

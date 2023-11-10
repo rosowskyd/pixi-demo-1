@@ -14,7 +14,7 @@ export class Hero {
         this.score = 0;
     }
 
-    dieFromBird() {
+    dieFromBomb() {
         this.sprite.emit("die");
     }
 

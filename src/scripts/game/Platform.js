@@ -3,14 +3,14 @@ import * as PIXI from "pixi.js";
 import { App } from '../system/App';
 // [10]
 import { Diamond } from './Diamond';
-import { Bird } from './Bird';
+import { Bomb } from './Bomb';
 // [/10]
 
 export class Platform {
     constructor(rows, cols, x) {
         // [10]
         this.diamonds = [];
-        this.birds = [];
+        this.bombs = [];
         // [/10]
 
         this.rows = rows;
@@ -26,7 +26,7 @@ export class Platform {
         this.dx = App.config.platforms.moveSpeed;
         this.createBody();
         this.createDiamonds();
-        this.createBirds();
+        this.createBombs();
     }
 
     // [10]
@@ -48,21 +48,21 @@ export class Platform {
     }
     // [/10]
 
-    createBirds() {
-        const y = App.config.birds.offset.min + Math.random() * (App.config.birds.offset.max - App.config.birds.offset.min);
+    createBombs() {
+        const y = App.config.bombs.offset.min + Math.random() * (App.config.bombs.offset.max - App.config.bombs.offset.min);
 
         for (let i = 0; i < this.cols; i++) {
-            if (Math.random() < App.config.birds.chance) {
-                this.createBird(this.tileSize * i, -y);
+            if (Math.random() < App.config.bombs.chance) {
+                this.createBomb(this.tileSize * i, -y);
             }
         }
     }
 
-    createBird(x, y) {
-            const bird = new Bird(x, y);
-            this.container.addChild(bird.sprite);
-            bird.createBody();
-            this.birds.push(bird);
+    createBomb(x, y) {
+            const bomb = new Bomb(x, y);
+            this.container.addChild(bomb.sprite);
+            bomb.createBody();
+            this.bombs.push(bomb);
     }
 
     createBody() {
@@ -106,7 +106,7 @@ export class Platform {
     destroy() {
         Matter.World.remove(App.physics.world, this.body);
         this.diamonds.forEach(diamond => diamond.destroy());
-        this.birds.forEach(bird => bird.destroy());
+        this.bombs.forEach(bomb => bomb.destroy());
         this.container.destroy();
     }
 }

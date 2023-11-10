@@ -47,7 +47,7 @@ export const Config = {
             y: 595
         }
     },
-    birds: {
+    bombs: {
         chance: 0.2,
         offset: {
             min: 200,
