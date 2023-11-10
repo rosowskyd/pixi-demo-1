@@ -2,7 +2,7 @@
     "name": "match3",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "index.ts",
     "scripts": {
         "build": "webpack --config webpack/prod.js ",
         "start": "webpack-dev-server --config webpack/base.js --open"
@@ -13,6 +13,8 @@
         "pixi.js": "^6.5.1"
     },
     "devDependencies": {
+        "@types/matter-js": "^0.19.4",
+        "@types/webpack-env": "^1.18.4",
         "babel-loader": "^8.2.5",
         "clean-webpack-plugin": "^4.0.0",
         "file-loader": "^6.2.0",
