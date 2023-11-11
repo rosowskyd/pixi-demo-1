@@ -63,6 +63,10 @@ export class Hero {
             this.sprite.emit("die");
         }
         // [/14]
+        if (this.score <= -5) {
+            this.sprite.emit("die");
+        }
+
     }
 
     createSprite() {
