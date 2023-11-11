@@ -16,6 +16,7 @@ export class GameScene extends Scene {
         this.createUI();
         //[/13]
     }
+
     //[13]
     createUI() {
         this.labelScore = new LabelScore();
@@ -24,8 +25,8 @@ export class GameScene extends Scene {
             this.labelScore.renderScore(this.hero.score);
         });
     }
-    //[13]
 
+    //[13]
     setEvents() {
         Matter.Events.on(App.physics, 'collisionStart', this.onCollisionStart.bind(this));
     }
@@ -41,8 +42,14 @@ export class GameScene extends Scene {
 
         const diamond = colliders.find(body => body.gameDiamond);
 
+        const slime = colliders.find(body => body.gameSlime);
+
+        if (hero && slime) {
+            this.hero.slimeAttack(slime.gameSlime);
+        }
         if (hero && diamond) {
             this.hero.collectDiamond(diamond.gameDiamond);
+
         }
     }
 
