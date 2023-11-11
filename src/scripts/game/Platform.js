@@ -99,7 +99,6 @@ export class Platform {
         tile.y = row * tile.height;
     }
 
-
     // 06
     move() {
         if (this.body) {

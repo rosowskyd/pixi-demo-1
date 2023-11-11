@@ -16,7 +16,7 @@ export class LabelScore extends PIXI.Text {
 
         const scores = { score };
 
-        highScore.push(scores)
+        highScore.push(scores);
 
         highScore.sort((a, b) => b.score - a.score).splice(1);
 

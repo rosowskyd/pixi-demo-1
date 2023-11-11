@@ -21,9 +21,6 @@ export class Slime {
     this.sprite.loop = true;
     this.sprite.animationSpeed = 0.01;
     this.sprite.play();
-
-
-
   }
 
   update() {

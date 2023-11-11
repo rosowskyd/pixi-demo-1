@@ -16,6 +16,7 @@ export class GameScene extends Scene {
         this.createUI();
         //[/13]
     }
+
     //[13]
     createUI() {
         this.labelScore = new LabelScore();
@@ -24,8 +25,8 @@ export class GameScene extends Scene {
             this.labelScore.renderScore(this.hero.score);
         });
     }
-    //[13]
 
+    //[13]
     setEvents() {
         Matter.Events.on(App.physics, 'collisionStart', this.onCollisionStart.bind(this));
     }
